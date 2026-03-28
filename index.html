@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Multiverse Wiki</title>
+<style>
+  /* Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-padding-top: 80px; /* makes anchor headings fully visible below sticky nav */
+    scroll-behavior: smooth;  /* smooth scrolling */
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('1.png') center/cover no-repeat fixed;
+    color: #f0f0f0;
+    overflow-x: hidden;
+  }
+
+  /* Hero Logo Section */
+  .hero-logo {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-logo img {
+    max-width: 400px;
+    width: 80%;
+    border-radius: 20px;
+    transition: opacity 1s ease-out;
+  }
+
+  /* Fade-in sections */
+  .fade { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+  .fade.show { opacity: 1; transform: translateY(0); }
+
+  /* Sticky nav */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    backdrop-filter: blur(6px);
+    background: rgba(20,20,20,0.3); /* subtle transparent */
+    border-radius: 20px;
+    margin: 0 20px;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #f0f0f0;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+
+  nav a:hover { background: rgba(255,255,255,0.12); }
+
+  main { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+  h2 { margin-bottom: 20px; font-size: 1.8em; border-bottom: 2px solid #444; padding-bottom: 10px; }
+
+  /* Black cards for readability */
+  .card {
+    background: rgba(0, 0, 0, 0.95); /* fully black with slight transparency */
+    border-radius: 25px;
+    border-left: 5px solid #00d8ff;
+    padding: 20px;
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  }
+
+  .card h3 { margin-bottom: 10px; font-size: 1.5em; }
+
+  footer {
+    text-align: center;
+    padding: 25px;
+    backdrop-filter: blur(8px);
+    background: rgba(30,30,30,0.7);
+    border-top: 2px solid #444;
+    border-radius: 30px 30px 0 0;
+    margin-top: 50px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { background: #444; border-radius: 5px; }
+  ::-webkit-scrollbar-track { background: #101010; }
+</style>
+</head>
+<body>
+
+<!-- Hero Logo Section -->
+<section class="hero-logo">
+  <img src="logo.png" id="main-logo" alt="AI Multiverse Logo">
+</section>
+
+<!-- Navigation -->
+<nav>
+  <a href="#universes">Universes</a>
+  <a href="#characters">Characters</a>
+  <a href="#villains">Villains</a>
+  <a href="#episodes">Episodes</a>
+  <a href="#production">Production</a>
+</nav>
+
+<main>
+  <section id="universes" class="fade">
+    <h2>Universes</h2>
+    <div class="card">
+      <h3>AI Presidents</h3>
+      <p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama, navigating multiverse chaos.</p>
+    </div>
+    <div class="card">
+      <h3>Rappers Play</h3>
+      <p>Universe for rappers like Kanye West, Playboi Carti, Tyler, and Frank Ocean. Includes supernatural elements like vampires.</p>
+    </div>
+    <div class="card">
+      <h3>Democrats Hangout</h3>
+      <p>Features Gavin Newsom, Kamala Harris, Tim Walz, and Barack Obama. They face threats from horror-inspired villains.</p>
+    </div>
+    <div class="card">
+      <h3>ThePresidentialMorons</h3>
+      <p>Chaos-driven universe with major antagonist Nicole from "Class of 09."</p>
+    </div>
+  </section>
+
+  <section id="characters" class="fade">
+    <h2>Characters</h2>
+    <div class="card">
+      <h3>Jerry Thomas Edward</h3>
+      <p>SpaceX scientist, family man, and multiverse scholar.</p>
+    </div>
+    <div class="card">
+      <h3>Donald Trump</h3>
+      <p>Multiple versions throughout the multiverse.</p>
+    </div>
+    <div class="card">
+      <h3>Joe Biden</h3>
+      <p>Appears in multiple universes including Democrats Hangout and AI Presidents.</p>
+    </div>
+    <div class="card">
+      <h3>Barack Obama</h3>
+      <p>Just like Joe, he has several multiverse variations.</p>
+    </div>
+    <div class="card">
+      <h3>Kanye West</h3>
+      <p>Rapper in Rappers Play universe. Known for nitrous addiction.</p>
+    </div>
+    <div class="card">
+      <h3>Playboi Carti</h3>
+      <p>Vampire rapper in the Rappers Play universe.</p>
+    </div>
+  </section>
+
+  <section id="villains" class="fade">
+    <h2>Villains</h2>
+    <div class="card">
+      <h3>Ace the Creator</h3>
+      <p>Evil clone of Tyler the Creator in Rappers Play universe.</p>
+    </div>
+    <div class="card">
+      <h3>Elon</h3>
+      <p>Main threat in the US Plays universe.</p>
+    </div>
+    <div class="card">
+      <h3>Nicole</h3>
+      <p>Main antagonist in ThePresidentialMorons universe, inspired by Class of 09.</p>
+    </div>
+  </section>
+
+  <section id="episodes" class="fade">
+    <h2>Episodes</h2>
+    <div class="card">
+      <h3>Season 1 (6 Episodes)</h3>
+      <p>Introduces universes, characters, and multiverse chaos.</p>
+    </div>
+    <div class="card">
+      <h3>Season 2 (10 Episodes)</h3>
+      <p>Expands universes, villains, and multiverse crossovers.</p>
+    </div>
+  </section>
+
+  <section id="production" class="fade">
+    <h2>Production</h2>
+    <div class="card">
+      <p>Created and produced by multiple teams including US Plays, Rappers Play, Democrats Hangout, ThePresidentialMorons, Presidential Passports, and Cooldudes Presidents. Began in 2024, originally planned as "Battleworld," referenced in Episode 3.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 The AI Multiverse Wiki
+</footer>
+
+<script>
+  // Fade in sections on scroll
+  const faders = document.querySelectorAll('.fade');
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  faders.forEach(fader => appearOnScroll.observe(fader));
+
+  // Logo fade on scroll
+  const logo = document.getElementById('main-logo');
+  window.addEventListener('scroll', () => {
+    let scrollY = window.scrollY;
+    logo.style.opacity = Math.max(1 - scrollY / 300, 0);
+  });
+</script>
+
+</body>
+</html>
