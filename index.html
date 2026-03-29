@@ -17,7 +17,7 @@
     line-height: 1.6;
   }
 
-  /* Hero Section & Logo Animation */
+  /* Hero Section */
   .hero-logo {
     height: 100vh;
     display: flex;
@@ -26,8 +26,9 @@
     background: transparent;
   }
   .hero-logo img {
-    max-width: 450px;
-    width: 70%;
+    /* UPDATED FOR BIGGER, RESPONSIVE SIZE */
+    max-width: 1000px; /* Maximum size on large PCs */
+    width: 90vw;       /* Sets size relative to screen width, safe for mobile */
     filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.3));
     animation: initialFade 2.5s ease-in-out forwards;
   }
@@ -52,9 +53,9 @@
   nav a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     transition: all 0.3s ease;
   }
@@ -72,16 +73,15 @@
     padding-bottom: 10px;
   }
 
-  /* The Extra Clean Glass Card */
   .card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
-    padding: 30px;
+    padding: 35px;
     margin-bottom: 25px;
-    transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
   }
   .card:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -89,27 +89,37 @@
     border: 1px solid rgba(187, 134, 252, 0.4);
   }
   .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #bb86fc; }
-  .card p { color: rgba(255, 255, 255, 0.85); }
 
-  /* Section Fade In */
+  /* Discord Branding */
+  .discord-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .discord-logo {
+    width: 120px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 15px rgba(187, 134, 252, 0.6));
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .discord-logo:hover { transform: scale(1.1); }
+  .join-link {
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: opacity 0.3s;
+  }
+
   .fade { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
   .fade.show { opacity: 1; transform: translateY(0); }
 
-  /* Episode Pop-In Grid */
   .episode-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
-    margin-top: 20px;
-  }
-  .episode-card {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .episode-card.pop-in {
-    opacity: 1;
-    transform: scale(1);
   }
   .video-container {
     margin-top: 20px;
@@ -126,18 +136,20 @@
     font-size: 0.85rem;
     letter-spacing: 1px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.8;
   }
-  .footer-subtext { display: block; margin-top: 10px; color: #bb86fc; opacity: 0; transition: opacity 1s; }
-  .footer-subtext.show { opacity: 1; }
-
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-thumb { background: rgba(187, 134, 252, 0.3); border-radius: 10px; }
+  .footer-credit {
+    display: block;
+    color: #bb86fc;
+    font-weight: 600;
+    margin-top: 5px;
+  }
 </style>
 </head>
 <body>
 
 <section class="hero-logo">
-  <img src="logo.png" id="main-logo" alt="AI Multiverse">
+  <img src="logo.png" id="main-logo" alt="AI Multiverse Logo">
 </section>
 
 <nav>
@@ -145,6 +157,7 @@
   <a href="#characters">Characters</a>
   <a href="#villains">Villains</a>
   <a href="#episodes">Episodes</a>
+  <a href="#server">Server</a>
   <a href="#production">Production</a>
 </nav>
 
@@ -152,9 +165,9 @@
   <section id="universes" class="fade">
     <h2>Universes</h2>
     <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama, navigating multiverse chaos.</p></div>
-    <div class="card"><h3>Rappers Play</h3><p>Universe for rappers like Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar.</p></div>
+    <div class="card"><h3>Rappers Play</h3><p>Universe for rappers like Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar. Includes supernatural elements like vampires.</p></div>
     <div class="card"><h3>Democrats Hangout</h3><p>Features Gavin Newsom, Kamala Harris, and Tim Walz. They face threats from horror-inspired villains.</p></div>
-    <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with major antagonist Nicole from "Class of 09."</p></div>
+    <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with major antagonist Nicole from "Class of 09".</p></div>
   </section>
 
   <section id="characters" class="fade">
@@ -163,18 +176,19 @@
     <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
     <div class="card"><h3>Joe Biden</h3><p>Multiple variations in the AI Multiverse.</p></div>
     <div class="card"><h3>Barack Obama</h3><p>Multiple versions in the AI Multiverse.</p></div>
-    <div class="card"><h3>Gavin Newsom</h3><p>Governor of California. Filmmaking politician.</p></div>
-    <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a 2028 campaign. Filmmaking politician.</p></div>
-    <div class="card"><h3>Tim Walz</h3><p>Learning to enjoy horror films. Filmmaking politician.</p></div>
-    <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe.</p></div>
+    <div class="card"><h3>Gavin Newsom</h3><p>Governor of California and filmmaking politician.</p></div>
+    <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a campaign for 2028.</p></div>
+    <div class="card"><h3>Tim Walz</h3><p>Learning to enjoy horror films.</p></div>
+    <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe known for nitrous addiction.</p></div>
     <div class="card"><h3>Playboi Carti</h3><p>Vampire rapper in the Rappers Play universe.</p></div>
-    <div class="card"><h3>Tyler, The Creator</h3><p>Made The Rappers Universe.</p></div>
+    <div class="card"><h3>Tyler, The Creator</h3><p>Rapper in Rappers Play universe.</p></div>
     <div class="card"><h3>Frank Ocean</h3><p>Rapper in Rappers Play universe.</p></div>
     <div class="card"><h3>Kendrick Lamar</h3><p>Rapper in Rappers Play universe.</p></div>
   </section>
 
   <section id="villains" class="fade">
     <h2>Villains</h2>
+    <div class="card"><h3>Pennywise</h3><p>The primary antagonist for Democrats Plays, based on the novel. Appears in both Season 1 and Season 2.</p></div>
     <div class="card"><h3>Ace the Creator</h3><p>Evil clone of Tyler the Creator in Rappers Play universe.</p></div>
     <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
     <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe.</p></div>
@@ -182,38 +196,50 @@
 
   <section id="episodes" class="fade">
     <h2>Episodes</h2>
-    <div class="episode-container" id="episode-grid">
-      <div class="card episode-card">
-        <h3>1. Pilot</h3>
-        <p>The Start Of It All.</p>
+    <div class="episode-container">
+      <div class="card">
+        <h3>01 Pilot</h3>
+        <p>The dawn of the multiverse.</p>
         <div class="video-container">
           <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="card episode-card">
-        <h3>2. The Music</h3>
-        <p>A Continues the saga with a focus on musical themes.</p>
+      <div class="card">
+        <h3>02 The Music</h3>
+        <p>A rhythmic descent into madness.</p>
         <div class="video-container">
           <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
-    <div class="card" style="margin-top:25px;"><h3>Season 2</h3><p>10 Episodes Planned Look Out For Any Teasers.</p></div>
+  </section>
+
+  <section id="server" class="fade">
+    <h2>The Hub</h2>
+    <div class="card discord-container">
+      <a href="https://discord.gg/5sxsdE3dNZ" target="_blank">
+        <img src="D.png" alt="Discord Logo" class="discord-logo">
+      </a>
+      <h3>Official Discord Server</h3>
+      <p style="margin-bottom: 15px;">The central hub for sneak peeks, behind-the-scenes updates, and chatting about the universe.</p>
+      <a href="https://discord.gg/5sxsdE3dNZ" target="_blank" class="join-link">click me to join (:</a>
+    </div>
   </section>
 
   <section id="production" class="fade">
     <h2>Production</h2>
-    <div class="card"><p>Created and produced by multiple teams including US Plays, Rappers Play, and more. Began in 2024, originally planned as "Battleworld."</p></div>
+    <div class="card">
+      <p>Created and produced by multiple teams including US Plays, Rappers Play, Democrats Hangout, and more. Began in 2024, originally planned as "Battleworld".</p>
+    </div>
   </section>
 </main>
 
 <footer>
   THE AI MULTIVERSE WIKI &copy; 2026
-  <span class="footer-subtext" id="footer-note">MADE BY COOL DUDE</span>
+  <span class="footer-credit">WIKI MADE BY COOL DUDE</span>
 </footer>
 
 <script>
-  // Section Fade In
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('show');
@@ -221,37 +247,11 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-  // Logo Opacity on Scroll
   const logo = document.getElementById('main-logo');
   window.addEventListener('scroll', () => {
-    logo.style.opacity = Math.max(1 - window.scrollY / 400, 0);
+    // Modified: Scrolling opacity effect starts after a slightly larger scroll amount for the bigger logo
+    logo.style.opacity = Math.max(1 - window.scrollY / 500, 0);
   });
-
-  // Footer reveal
-  window.addEventListener('scroll', () => {
-    if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 50){
-      document.getElementById('footer-note').classList.add('show');
-    }
-  });
-
-  // Episode Pop-in (2 at a time)
-  const epGrid = document.getElementById('episode-grid');
-  const eps = Array.from(epGrid.querySelectorAll('.episode-card'));
-  const epObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        let i = 0;
-        const interval = setInterval(() => {
-          if (eps[i]) eps[i].classList.add('pop-in');
-          if (eps[i+1]) eps[i+1].classList.add('pop-in');
-          i += 2;
-          if (i >= eps.length) clearInterval(interval);
-        }, 400);
-        epObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  epObserver.observe(epGrid);
 </script>
 
 </body>
