@@ -6,98 +6,138 @@
 <title>The AI Multiverse Wiki</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-padding-top: 80px; scroll-behavior: smooth; }
+  html { scroll-padding-top: 100px; scroll-behavior: smooth; }
+  
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #f0f0f0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #ffffff;
     overflow-x: hidden;
-    background: linear-gradient(135deg, #000000 0%, #2a003f 70%, #4b0082 100%);
+    background: radial-gradient(circle at top right, #2a003f, #000000 60%);
     background-attachment: fixed;
+    line-height: 1.6;
   }
+
+  /* Hero Section & Logo Animation */
   .hero-logo {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(40,0,50,0.5) 100%);
+    background: transparent;
   }
   .hero-logo img {
-    max-width: 400px;
-    width: 80%;
-    border-radius: 20px;
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    max-width: 450px;
+    width: 70%;
+    filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.3));
+    animation: initialFade 2.5s ease-in-out forwards;
   }
-  .fade { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
-  .fade.show { opacity: 1; transform: translateY(0); }
+  @keyframes initialFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sticky Glass Navbar */
   nav {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    padding: 15px;
-    backdrop-filter: blur(6px);
-    background: rgba(20,20,20,0.3);
-    border-radius: 20px;
-    margin: 0 20px;
+    gap: 30px;
+    padding: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
-    top: 10px;
+    top: 0;
     z-index: 100;
   }
   nav a {
     text-decoration: none;
-    color: #bb86fc;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 50px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     transition: all 0.3s ease;
   }
-  nav a:hover { background: rgba(187,134,252,0.15); color: #d1aaff; }
-  main { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-  h2 { margin-bottom: 20px; font-size: 1.9em; border-bottom: 2px solid #bb86fc; padding-bottom: 10px; color: #d1aaff; }
+  nav a:hover { color: #bb86fc; }
+
+  main { max-width: 1100px; margin: 80px auto; padding: 0 25px; }
+
+  h2 { 
+    margin-bottom: 40px; 
+    font-size: 2rem; 
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(187, 134, 252, 0.3);
+    padding-bottom: 10px;
+  }
+
+  /* The Extra Clean Glass Card */
   .card {
-    background: rgba(0, 0, 0, 0.95);
-    border-radius: 40px;
-    border-left: 6px solid #bb86fc;
-    padding: 25px 20px;
-    margin-bottom: 30px;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(10px);
-    max-width: 700px;
-    transform-origin: left;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
   }
   .card:hover {
-    transform: translateX(10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(187,134,252,0.4);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+    border: 1px solid rgba(187, 134, 252, 0.4);
   }
-  .card h3 { margin-bottom: 12px; font-size: 1.6em; color: #bb86fc; }
-  .card p { color: #e5e5e5; line-height: 1.5; }
+  .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #bb86fc; }
+  .card p { color: rgba(255, 255, 255, 0.85); }
+
+  /* Section Fade In */
+  .fade { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+  .fade.show { opacity: 1; transform: translateY(0); }
+
+  /* Episode Pop-In Grid */
+  .episode-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+  }
+  .episode-card {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .episode-card.pop-in {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .video-container {
+    margin-top: 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+
   footer {
     text-align: center;
-    padding: 25px;
-    backdrop-filter: blur(8px);
-    background: rgba(30,30,30,0.7);
-    border-top: 2px solid #bb86fc;
-    border-radius: 30px 30px 0 0;
-    margin-top: 50px;
-    color: #d1aaff;
+    padding: 60px 20px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .footer-subtext { 
-    font-size: 0.9em; 
-    color: #d1aaff; 
-    opacity: 0;
-    transition: opacity 1.2s ease-out;
-  }
+  .footer-subtext { display: block; margin-top: 10px; color: #bb86fc; opacity: 0; transition: opacity 1s; }
   .footer-subtext.show { opacity: 1; }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-thumb { background: #444; border-radius: 5px; }
-  ::-webkit-scrollbar-track { background: #101010; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: rgba(187, 134, 252, 0.3); border-radius: 10px; }
 </style>
 </head>
 <body>
 
 <section class="hero-logo">
-  <img src="logo.png" id="main-logo" alt="AI Multiverse Logo">
+  <img src="logo.png" id="main-logo" alt="AI Multiverse">
 </section>
 
 <nav>
@@ -121,15 +161,15 @@
     <h2>Characters</h2>
     <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist, family man, and multiverse scholar.</p></div>
     <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
-    <div class="card"><h3>Joe Biden</h3><p>Joe Biden is another president with multiple variations in the AI Multiverse.</p></div>
-    <div class="card"><h3>Barack Obama</h3><p>Barrack Obama has multiple versions in the AI Multiverse.</p></div>
-    <div class="card"><h3>Gavin Newsom</h3><p> Governor of California. Also a filmmaking politician.</p></div>
-    <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a presidential campaign for 2028. Also a filmmaking politician.</p></div>
-    <div class="card"><h3>Tim Walz</h3><p>Starting to enjoy horror films, even though at first he wasn’t too fond of them. Also a filmmaking politician.</p></div>
-    <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe. Known for nitrous addiction.</p></div>
+    <div class="card"><h3>Joe Biden</h3><p>Multiple variations in the AI Multiverse.</p></div>
+    <div class="card"><h3>Barack Obama</h3><p>Multiple versions in the AI Multiverse.</p></div>
+    <div class="card"><h3>Gavin Newsom</h3><p>Governor of California. Filmmaking politician.</p></div>
+    <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a 2028 campaign. Filmmaking politician.</p></div>
+    <div class="card"><h3>Tim Walz</h3><p>Learning to enjoy horror films. Filmmaking politician.</p></div>
+    <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe.</p></div>
     <div class="card"><h3>Playboi Carti</h3><p>Vampire rapper in the Rappers Play universe.</p></div>
-    <div class="card"><h3>Tyler, The Creator</h3><p>Rapper in Rappers Play universe.</p></div>
-    <div class="card"><h3>Frank Ocean</h3><p>Rapper in Rappers Play universe. Will he ever Drop?</p></div>
+    <div class="card"><h3>Tyler, The Creator</h3><p>Made The Rappers Universe.</p></div>
+    <div class="card"><h3>Frank Ocean</h3><p>Rapper in Rappers Play universe.</p></div>
     <div class="card"><h3>Kendrick Lamar</h3><p>Rapper in Rappers Play universe.</p></div>
   </section>
 
@@ -137,49 +177,81 @@
     <h2>Villains</h2>
     <div class="card"><h3>Ace the Creator</h3><p>Evil clone of Tyler the Creator in Rappers Play universe.</p></div>
     <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
-    <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe, inspired by Class of 09.</p></div>
+    <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe.</p></div>
   </section>
 
   <section id="episodes" class="fade">
     <h2>Episodes</h2>
-    <div class="card"><h3>Season 1 (6 Episodes)</h3><p>Introduces universes, characters, and multiverse chaos.</p></div>
-    <div class="card"><h3>Season 2 (10 Episodes)</h3><p>Expands universes, villains, and multiverse crossovers.</p></div>
+    <div class="episode-container" id="episode-grid">
+      <div class="card episode-card">
+        <h3>1. Pilot</h3>
+        <p>The Start Of It All.</p>
+        <div class="video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="card episode-card">
+        <h3>2. The Music</h3>
+        <p>A Continues the saga with a focus on musical themes.</p>
+        <div class="video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:25px;"><h3>Season 2</h3><p>10 Episodes currently in development. Expands villains and multiverse crossovers.</p></div>
   </section>
 
   <section id="production" class="fade">
     <h2>Production</h2>
-    <div class="card"><p>Created and produced by multiple teams including US Plays, Rappers Play, Democrats Hangout, ThePresidentialMorons, Presidential Passports, and Cooldudes Presidents. Began in 2024, originally planned as "Battleworld," referenced in Episode 3.</p></div>
+    <div class="card"><p>Created and produced by multiple teams including US Plays, Rappers Play, and more. Began in 2024, originally planned as "Battleworld."</p></div>
   </section>
 </main>
 
 <footer>
-  &copy; 2026 The AI Multiverse Wiki<br>
-  <span class="footer-subtext">made by cool dude (:</span>
+  THE AI MULTIVERSE WIKI &copy; 2026
+  <span class="footer-subtext" id="footer-note">MADE BY COOL DUDE</span>
 </footer>
 
 <script>
-  const faders = document.querySelectorAll('.fade');
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        e.target.classList.add('show');
-        obs.unobserve(e.target);
-      }
+  // Section Fade In
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
     });
-  }, {threshold:0.2});
-  faders.forEach(f => observer.observe(f));
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
+  // Logo Opacity on Scroll
   const logo = document.getElementById('main-logo');
   window.addEventListener('scroll', () => {
-    logo.style.opacity = Math.max(1 - window.scrollY / 300, 0);
+    logo.style.opacity = Math.max(1 - window.scrollY / 400, 0);
   });
 
-  const footerText = document.querySelector('.footer-subtext');
+  // Footer reveal
   window.addEventListener('scroll', () => {
     if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 50){
-      footerText.classList.add('show');
+      document.getElementById('footer-note').classList.add('show');
     }
   });
+
+  // Episode Pop-in (2 at a time)
+  const epGrid = document.getElementById('episode-grid');
+  const eps = Array.from(epGrid.querySelectorAll('.episode-card'));
+  const epObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        let i = 0;
+        const interval = setInterval(() => {
+          if (eps[i]) eps[i].classList.add('pop-in');
+          if (eps[i+1]) eps[i+1].classList.add('pop-in');
+          i += 2;
+          if (i >= eps.length) clearInterval(interval);
+        }, 400);
+        epObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  epObserver.observe(epGrid);
 </script>
 
 </body>
