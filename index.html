@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Multiverse Wiki</title>
 <style>
+  /* Base Styles */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-padding-top: 100px; scroll-behavior: smooth; }
   
@@ -17,7 +18,7 @@
     line-height: 1.6;
   }
 
-  /* Hero Section */
+  /* Hero Section - Responsive l.png */
   .hero-logo {
     height: 100vh;
     display: flex;
@@ -31,6 +32,7 @@
     filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.3));
     animation: initialFade 2.5s ease-in-out forwards;
   }
+
   @keyframes initialFade {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -72,10 +74,10 @@
     padding-bottom: 10px;
   }
 
+  /* Content Cards */
   .card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
     padding: 35px;
@@ -89,7 +91,7 @@
   }
   .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #bb86fc; }
 
-  /* Discord Hub Styling */
+  /* Discord Hub - d.png */
   .discord-container {
     display: flex;
     flex-direction: column;
@@ -101,9 +103,7 @@
     margin-bottom: 25px;
     filter: drop-shadow(0 0 15px rgba(187, 134, 252, 0.6));
     transition: transform 0.3s ease;
-    cursor: pointer;
   }
-  .discord-logo:hover { transform: scale(1.1); }
   .join-link {
     color: #00d2ff;
     text-decoration: none;
@@ -111,39 +111,21 @@
     font-size: 1.1rem;
     transition: opacity 0.3s;
   }
-  .join-link:hover { text-decoration: underline; opacity: 0.8; }
+  .join-link:hover { text-decoration: underline; }
 
+  /* Animations */
   .fade { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
   .fade.show { opacity: 1; transform: translateY(0); }
-
-  .episode-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 25px;
-  }
-  .video-container {
-    margin-top: 20px;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    background: #000;
-  }
 
   footer {
     text-align: center;
     padding: 60px 20px;
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.85rem;
-    letter-spacing: 1px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     line-height: 1.8;
   }
-  .footer-credit {
-    display: block;
-    color: #bb86fc;
-    font-weight: 600;
-    margin-top: 5px;
-  }
+  .footer-credit { display: block; color: #bb86fc; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -164,64 +146,35 @@
 <main>
   <section id="universes" class="fade">
     <h2>Universes</h2>
-    <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama, navigating multiverse chaos.</p></div>
-    <div class="card"><h3>Rappers Play</h3><p>Universe for rappers like Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar. Includes supernatural elements like vampires.</p></div>
-    <div class="card"><h3>Democrats Hangout</h3><p>Features Gavin Newsom, Kamala Harris, and Tim Walz. They face threats from horror-inspired villains.</p></div>
-    <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with major antagonist Nicole from "Class of 09".</p></div>
+    <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama.</p></div>
+    <div class="card"><h3>Rappers Play</h3><p>Features Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar.</p></div>
+    <div class="card"><h3>Democrats Hangout</h3><p>Features Gavin Newsom, Kamala Harris, and Tim Walz.</p></div>
+    <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with antagonist Nicole from "Class of 09".</p></div>
   </section>
 
   <section id="characters" class="fade">
     <h2>Characters</h2>
-    <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist, family man, and multiverse scholar.</p></div>
-    <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
-    <div class="card"><h3>Joe Biden</h3><p>Multiple variations in the AI Multiverse.</p></div>
-    <div class="card"><h3>Barack Obama</h3><p>Multiple versions in the AI Multiverse.</p></div>
-    <div class="card"><h3>Gavin Newsom</h3><p>Governor of California and filmmaking politician.</p></div>
+    <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist and multiverse scholar.</p></div>
     <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a campaign for 2028.</p></div>
-    <div class="card"><h3>Tim Walz</h3><p>Learning to enjoy horror films.</p></div>
-    <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe known for nitrous addiction.</p></div>
-    <div class="card"><h3>Playboi Carti</h3><p>Vampire rapper in the Rappers Play universe.</p></div>
-    <div class="card"><h3>Tyler, The Creator</h3><p>Rapper in Rappers Play universe.</p></div>
-    <div class="card"><h3>Frank Ocean</h3><p>Rapper in Rappers Play universe.</p></div>
-    <div class="card"><h3>Kendrick Lamar</h3><p>Rapper in Rappers Play universe.</p></div>
+    <div class="card"><h3>Tim Walz</h3><p>Filmmaking politician starting to enjoy horror.</p></div>
+    <div class="card"><h3>Kanye West</h3><p>Known for nitrous addiction in the Rappers Play universe.</p></div>
   </section>
 
   <section id="villains" class="fade">
     <h2>Villains</h2>
-    <div class="card"><h3>Pennywise</h3><p>The primary antagonist for Democrats Plays, based on the novel. Appears in both Season 1 and Season 2.</p></div>
-    <div class="card"><h3>Ace the Creator</h3><p>Evil clone of Tyler the Creator in Rappers Play universe.</p></div>
+    <div class="card"><h3>Pennywise</h3><p>Main antagonist for Democrats Plays, based on the novel. Appears in Seasons 1 & 2.</p></div>
+    <div class="card"><h3>Ace the Creator</h3><p>Evil clone of Tyler the Creator.</p></div>
     <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
-    <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe.</p></div>
-  </section>
-
-  <section id="episodes" class="fade">
-    <h2>Episodes</h2>
-    <div class="episode-container">
-      <div class="card">
-        <h3>01 Pilot</h3>
-        <p>The dawn of the multiverse.</p>
-        <div class="video-container">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="card">
-        <h3>02 The Music</h3>
-        <p>A rhythmic descent into madness.</p>
-        <div class="video-container">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section id="server" class="fade">
     <h2>The Hub</h2>
     <div class="card discord-container">
       <a href="https://discord.gg/5sxsdE3dNZ" target="_blank">
-        <img src="d.png" alt="Discord Logo" class="discord-logo">
+        <img src="d.png" alt="Discord" class="discord-logo">
       </a>
       <h3>Official Discord Server</h3>
-      <p style="margin-bottom: 15px;">The central hub for sneak peeks, behind-the-scenes updates, and chatting about the universe.</p>
+      <p style="margin-bottom: 15px;">The central hub for sneak peeks and updates.</p>
       <a href="https://discord.gg/5sxsdE3dNZ" target="_blank" class="join-link">click me to join (:</a>
     </div>
   </section>
@@ -229,7 +182,7 @@
   <section id="production" class="fade">
     <h2>Production</h2>
     <div class="card">
-      <p>Created and produced by multiple teams including US Plays, Rappers Play, Democrats Hangout, and more. Began in 2024, originally planned as "Battleworld".</p>
+      <p>Began in 2024, originally planned as "Battleworld". Produced by US Plays, Rappers Play, and more.</p>
     </div>
   </section>
 </main>
