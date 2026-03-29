@@ -91,6 +91,20 @@
   }
   .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #bb86fc; }
 
+  /* Added Episode Grid & Video Embeds */
+  .episode-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+  }
+  .video-container {
+    margin-top: 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+
   /* Discord Hub - d.png */
   .discord-container {
     display: flex;
@@ -162,10 +176,33 @@
 
   <section id="villains" class="fade">
     <h2>Villains</h2>
+    <div class="card">
+        <h3>Ace the Creator</h3>
+        <p>An evil clone of Tyler the Creator in the Rappers Play universe. He is likely the Main Antagonist of the entire Multiverse and appears throughout Season 1 and Season 2.</p>
+    </div>
     <div class="card"><h3>Pennywise</h3><p>Main antagonist for Democrats Plays, based on the novel. Appears in Seasons 1 & 2.</p></div>
-    <div class="card"><h3>Ace the Creator</h3><p>An evil clone of Tyler the Creator in the Rappers Play universe. He is likely the Main Antagonist of the entire Multiverse and appears throughout Season 1 and Season 2.</p></div>
-    <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe..</p></div>
+    <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe.</p></div>
     <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
+  </section>
+
+  <section id="episodes" class="fade">
+    <h2>Episodes</h2>
+    <div class="episode-container">
+      <div class="card">
+        <h3>01 Pilot</h3>
+        <p>The series premiere introducing the core multiverse concept.</p>
+        <div class="video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="card">
+        <h3>02 The Music</h3>
+        <p>Continues the saga with a focus on music.</p>
+        <div class="video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="server" class="fade">
