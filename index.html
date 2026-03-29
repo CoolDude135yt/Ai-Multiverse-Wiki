@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Multiverse Wiki</title>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
 <style>
   /* Base Styles */
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +65,33 @@
   }
   nav a:hover { color: #bb86fc; }
 
-  main { max-width: 1100px; margin: 80px auto; padding: 0 25px; }
+  /* --- NEW SEARCH BAR STYLES --- */
+  .search-wrapper {
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 0 25px;
+    text-align: center;
+  }
+  #wikiSearch {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  #wikiSearch:focus {
+    border-color: #bb86fc;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+  }
+
+  main { max-width: 1100px; margin: 40px auto 80px auto; padding: 0 25px; }
 
   h2 { 
     margin-bottom: 40px; 
@@ -72,6 +101,7 @@
     font-weight: 700;
     border-bottom: 1px solid rgba(187, 134, 252, 0.3);
     padding-bottom: 10px;
+    margin-top: 60px;
   }
 
   /* Content Cards */
@@ -82,7 +112,7 @@
     border-radius: 24px;
     padding: 35px;
     margin-bottom: 25px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, opacity 0.3s ease;
   }
   .card:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -157,6 +187,10 @@
   <a href="#production">Production</a>
 </nav>
 
+<div class="search-wrapper">
+  <input type="text" id="wikiSearch" placeholder="Search the Multiverse..." onkeyup="filterWiki()">
+</div>
+
 <main>
   <section id="universes" class="fade">
     <h2>Universes</h2>
@@ -170,7 +204,7 @@
     <h2>Characters</h2>
     <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist, family man, and multiverse scholar.</p></div>
     <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
-    <div class="card"><h3>Joe Biden</h3><p> president with multiple variations in the AI Multiverse.</p></div>
+    <div class="card"><h3>Joe Biden</h3><p>President with multiple variations in the AI Multiverse.</p></div>
     <div class="card"><h3>Obama</h3><p>Another president with multiple variations in the AI Multiverse.</p></div>
     <div class="card"><h3>Barack Obama</h3><p>Has multiple versions in the AI Multiverse.</p></div>
     <div class="card"><h3>Gavin Newsom</h3><p>Governor of California. Also a filmmaking politician.</p></div>
@@ -239,6 +273,7 @@
 </footer>
 
 <script>
+  /* FADE ON SCROLL */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('show');
@@ -246,9 +281,43 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
+  /* LOGO FADE */
   const logo = document.getElementById('main-logo');
   window.addEventListener('scroll', () => {
     logo.style.opacity = Math.max(1 - window.scrollY / 500, 0);
+  });
+
+  /* SEARCH FUNCTIONALITY */
+  function filterWiki() {
+    let input = document.getElementById('wikiSearch').value.toLowerCase();
+    let cards = document.getElementsByClassName('card');
+    
+    for (let i = 0; i < cards.length; i++) {
+      // Don't filter the production, discord, or episode cards
+      if (cards[i].closest('#production') || cards[i].closest('#server') || cards[i].closest('#episodes')) continue;
+      
+      let text = cards[i].innerText.toLowerCase();
+      if (text.includes(input)) {
+        cards[i].style.display = "";
+        cards[i].style.opacity = "1";
+      } else {
+        cards[i].style.display = "none";
+        cards[i].style.opacity = "0";
+      }
+    }
+  }
+
+  /* KINGYE Easter Egg Script */
+  let inputBuffer = "";
+  const secretCode = "KINGYE";
+
+  window.addEventListener("keydown", (e) => {
+    inputBuffer += e.key.toUpperCase();
+    inputBuffer = inputBuffer.slice(-secretCode.length); 
+
+    if (inputBuffer === secretCode) {
+      window.location.href = "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u";
+    }
   });
 </script>
 
