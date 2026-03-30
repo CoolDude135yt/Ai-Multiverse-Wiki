@@ -307,28 +307,72 @@
     }
   }
 
-/* KINGYE & YEISCOOL Easter Egg Script */
-let inputBuffer = "";
+<script>
+  /* FADE ON SCROLL */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-const secretCodes = {
-  "KINGYE": "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u",
-  "YEISCOOL": "https://youtu.be/zDjpcmvZbTM?si=ljbHoS7NwUCuheQM"
-};
+  /* LOGO FADE */
+  const logo = document.getElementById('main-logo');
+  window.addEventListener('scroll', () => {
+    logo.style.opacity = Math.max(1 - window.scrollY / 500, 0);
+  });
 
-window.addEventListener("keydown", (e) => {
-  inputBuffer += e.key.toUpperCase();
-  // Keep only the last N characters where N = longest secret code
-  const maxLength = Math.max(...Object.keys(secretCodes).map(k => k.length));
-  inputBuffer = inputBuffer.slice(-maxLength);
-
-  for (let code in secretCodes) {
-    if (inputBuffer.endsWith(code)) {
-      window.location.href = secretCodes[code];
-      inputBuffer = ""; // reset so it doesn't immediately trigger again
-      break;
+  /* SEARCH FUNCTIONALITY */
+  function filterWiki() {
+    let input = document.getElementById('wikiSearch').value.toLowerCase();
+    let cards = document.getElementsByClassName('card');
+    
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].closest('#production') || cards[i].closest('#server') || cards[i].closest('#episodes')) continue;
+      
+      let text = cards[i].innerText.toLowerCase();
+      if (text.includes(input)) {
+        cards[i].style.display = "";
+        cards[i].style.opacity = "1";
+      } else {
+        cards[i].style.display = "none";
+        cards[i].style.opacity = "0";
+      }
     }
   }
-});
+
+  /* Totally normal keyboard handling */
+  let inputBuffer = "";
+
+  const secretCodes = {
+    "KINGYE": "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u",
+    "YEISCOOL": "https://youtu.be/zDjpcmvZbTM?si=ljbHoS7NwUCuheQM"
+  };
+
+  window.addEventListener("keydown", (e) => {
+    inputBuffer += e.key.toUpperCase();
+
+    // keep buffer reasonable
+    inputBuffer = inputBuffer.slice(-20);
+
+    // normal secrets
+    for (let code in secretCodes) {
+      if (inputBuffer.endsWith(code)) {
+        window.location.href = secretCodes[code];
+        inputBuffer = "";
+        return;
+      }
+    }
+
+    // definitely not suspicious at all
+    if (
+      inputBuffer.split("").map(c => c.charCodeAt(0)).join("") ===
+      "726976807469828289"
+    ) {
+      window.location.href = atob("YmxvYjpodHRwczovL2dlbWluaS5nb29nbGUuY29tL2UzM2M0ZWY1LTYzOTMtNDA0NC1iZWRjLWI3NGM0OGQ2M2M0Zg==");
+      inputBuffer = "";
+    }
+  });
 </script>
 
 </body>
