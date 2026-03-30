@@ -307,70 +307,16 @@
     }
   }
 
-<script>
-  /* FADE ON SCROLL */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-
-  /* LOGO FADE */
-  const logo = document.getElementById('main-logo');
-  window.addEventListener('scroll', () => {
-    logo.style.opacity = Math.max(1 - window.scrollY / 500, 0);
-  });
-
-  /* SEARCH FUNCTIONALITY */
-  function filterWiki() {
-    let input = document.getElementById('wikiSearch').value.toLowerCase();
-    let cards = document.getElementsByClassName('card');
-    
-    for (let i = 0; i < cards.length; i++) {
-      if (cards[i].closest('#production') || cards[i].closest('#server') || cards[i].closest('#episodes')) continue;
-      
-      let text = cards[i].innerText.toLowerCase();
-      if (text.includes(input)) {
-        cards[i].style.display = "";
-        cards[i].style.opacity = "1";
-      } else {
-        cards[i].style.display = "none";
-        cards[i].style.opacity = "0";
-      }
-    }
-  }
-
-  /* Totally normal keyboard handling */
+  /* KINGYE Easter Egg Script */
   let inputBuffer = "";
-
-  const secretCodes = {
-    "KINGYE": "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u",
-    "YEISCOOL": "https://youtu.be/zDjpcmvZbTM?si=ljbHoS7NwUCuheQM"
-  };
+  const secretCode = "KINGYE";
 
   window.addEventListener("keydown", (e) => {
     inputBuffer += e.key.toUpperCase();
+    inputBuffer = inputBuffer.slice(-secretCode.length); 
 
-    // keep buffer reasonable
-    inputBuffer = inputBuffer.slice(-20);
-
-    // normal secrets
-    for (let code in secretCodes) {
-      if (inputBuffer.endsWith(code)) {
-        window.location.href = secretCodes[code];
-        inputBuffer = "";
-        return;
-      }
-    }
-
-    // definitely not suspicious at all
-    if (
-      inputBuffer.split("").map(c => c.charCodeAt(0)).join("") ===
-      "726976807469828289"
-    ) {
-      window.location.href = atob("YmxvYjpodHRwczovL2dlbWluaS5nb29nbGUuY29tL2UzM2M0ZWY1LTYzOTMtNDA0NC1iZWRjLWI3NGM0OGQ2M2M0Zg==");
-      inputBuffer = "";
+    if (inputBuffer === secretCode) {
+      window.location.href = "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u";
     }
   });
 </script>
