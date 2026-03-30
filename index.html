@@ -307,18 +307,28 @@
     }
   }
 
-  /* KINGYE Easter Egg Script */
-  let inputBuffer = "";
-  const secretCode = "KINGYE";
+/* KINGYE & YEISCOOL Easter Egg Script */
+let inputBuffer = "";
 
-  window.addEventListener("keydown", (e) => {
-    inputBuffer += e.key.toUpperCase();
-    inputBuffer = inputBuffer.slice(-secretCode.length); 
+const secretCodes = {
+  "KINGYE": "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u",
+  "YEISCOOL": "https://youtu.be/zDjpcmvZbTM?si=ljbHoS7NwUCuheQM"
+};
 
-    if (inputBuffer === secretCode) {
-      window.location.href = "https://youtu.be/Aj-nPW-VEuo?si=ElilTHs7Sf5-WG7u";
+window.addEventListener("keydown", (e) => {
+  inputBuffer += e.key.toUpperCase();
+  // Keep only the last N characters where N = longest secret code
+  const maxLength = Math.max(...Object.keys(secretCodes).map(k => k.length));
+  inputBuffer = inputBuffer.slice(-maxLength);
+
+  for (let code in secretCodes) {
+    if (inputBuffer.endsWith(code)) {
+      window.location.href = secretCodes[code];
+      inputBuffer = ""; // reset so it doesn't immediately trigger again
+      break;
     }
-  });
+  }
+});
 </script>
 
 </body>
