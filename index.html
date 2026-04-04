@@ -211,7 +211,12 @@
       <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a 2028 campaign. Filmmaking politician.</p></div>
       <div class="card"><h3>Tim Walz</h3><p>Learning to love horror films. Filmmaking politician.</p></div>
       <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe. Known for nitrous addiction.</p></div>
-      <div class="card"><h3>Playboi Carti</h3><p>Rapper In Rappers Play Universe. FWÆH.</p></div>
+      <div class="card">
+        <h3>Playboi Carti</h3>
+        <p><strong>Role:</strong> Vampire Rapper</p>
+        <p><strong>Universe:</strong> Rappers Play</p>
+        <p><strong>Status:</strong> Antagonistic presence / Member of the Opium faction.</p>
+      </div>
       <div class="card"><h3>Tyler, The Creator</h3><p>He created the Rappers Play universe itself.</p></div>
       <div class="card"><h3>Frank Ocean</h3><p>Rapper in Rappers Play universe. Will he ever drop?</p></div>
       <div class="card"><h3>Kendrick Lamar</h3><p>Rapper in Rappers Play universe.</p></div>
@@ -228,11 +233,14 @@
     <section id="episodes" class="fade">
       <h2>Episodes</h2>
       <div class="episode-grid">
-        <div class="card"><h3>1. Pilot</h3><p>The series premiere.</p>
+        <div class="card"><h3>1. Pilot</h3><p>The series premiere introducing the core multiverse concept.</p>
           <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe></div>
         </div>
         <div class="card"><h3>2. The Music</h3><p>Continues the saga with a focus on music.</p>
           <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe></div>
+        </div>
+        <div class="card"><h3>3.Soon</h3><p>Placeholder for the upcoming episode saga enjoy this song whilst you wait.</p>
+          <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/HJl-i58SuW4" frameborder="0" allowfullscreen></iframe></div>
         </div>
       </div>
     </section>
@@ -253,11 +261,9 @@
   </main>
 </div>
 
-<footer>THE AI MULTIVERSE WIKI
-          BY COOL DUDE &copy; 2026</footer>
+<footer>THE AI MULTIVERSE WIKI &copy; 2026</footer>
 
 <script>
-  /* --- BACKGROUND LOGO SYSTEM --- */
   const bg = document.getElementById('bg-pattern');
   const logos = [];
   const rows = 5;
@@ -291,13 +297,11 @@
   }
   animate();
 
-  /* --- FADE EFFECTS --- */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-  /* --- SEARCH FILTER --- */
   function filterWiki() {
     let input = document.getElementById('wikiSearch').value.toLowerCase();
     let cards = document.querySelectorAll('.card');
@@ -307,22 +311,17 @@
     });
   }
 
-  /* --- REDIRECT SCRIPT --- */
+  /* --- RIPRECROOM REDIRECT --- */
   let typedSecret = "";
   const secretCode = "RIPRECROOM";
-  const redirectUrl = "https://youtu.be/gkoSFix4AZA?list=RDgkoSFix4AZA";
+  const redirectUrl = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
 
   document.addEventListener('keydown', (e) => {
-    // Only capture single characters to build the string
     if (e.key.length === 1) {
       typedSecret += e.key.toUpperCase();
-      
-      // If the current typed sequence ends with the secret code
       if (typedSecret.endsWith(secretCode)) {
         window.location.href = redirectUrl;
       }
-
-      // Keep the string length reasonable to avoid memory issues
       if (typedSecret.length > 50) {
         typedSecret = typedSecret.substring(typedSecret.length - secretCode.length);
       }
