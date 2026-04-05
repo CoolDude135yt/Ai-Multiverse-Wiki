@@ -26,7 +26,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center; 
-    align-items: center;      
+    align-items: center;     
     text-align: center;
     background: radial-gradient(circle at center, #1a002e 0%, #000000 100%);
   }
@@ -115,9 +115,11 @@
 
   .search-container {
     max-width: 700px;
-    margin: 80px auto 40px;
+    margin: 80px auto 20px;
     padding: 0 20px;
+    text-align: center;
   }
+  
   #wikiSearch {
     width: 100%;
     padding: 20px 35px;
@@ -132,10 +134,57 @@
   }
   #wikiSearch:focus { border-color: #bb86fc; box-shadow: 0 0 25px rgba(187, 134, 252, 0.2); }
 
+  /* --- TAB SYSTEM --- */
+  .tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+
+  .tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .tab-btn:hover { background: rgba(187, 134, 252, 0.15); }
+  .tab-btn.active {
+    background: #bb86fc;
+    color: #000;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
+  }
+
+  /* --- CENTERED TEXT BELOW TABS --- */
+  #explore-instruction {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #bb86fc;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+    transition: opacity 0.4s ease;
+  }
+
+  .tab-content { display: none; animation: fadeIn 0.4s ease; }
+  .tab-content.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
 
   h2 { 
-    margin: 80px 0 35px; 
+    margin: 40px 0 35px; 
     font-size: 2.6rem; 
     border-left: 8px solid #bb86fc;
     padding-left: 25px;
@@ -160,9 +209,6 @@
   .discord-card { text-align: center; }
   .discord-img { width: 110px; margin-bottom: 25px; }
   .join-btn { color: #00d2ff; font-weight: bold; text-decoration: none; font-size: 1.3rem; }
-
-  .fade { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-  .fade.show { opacity: 1; transform: translateY(0); }
 
   footer {
     text-align: center;
@@ -191,8 +237,18 @@
     <input type="text" id="wikiSearch" placeholder="Search characters, universes, or villains..." onkeyup="filterWiki()">
   </div>
 
+  <div class="tabs-nav">
+    <button class="tab-btn" onclick="openTab(event, 'universes')">Universes</button>
+    <button class="tab-btn" onclick="openTab(event, 'characters')">Characters</button>
+    <button class="tab-btn" onclick="openTab(event, 'villains')">Villains</button>
+    <button class="tab-btn" onclick="openTab(event, 'episodes')">Episodes</button>
+    <button class="tab-btn" onclick="openTab(event, 'production')">Production</button>
+  </div>
+
+  <p id="explore-instruction">Pick One To Start Exploring</p>
+
   <main>
-    <section id="universes" class="fade">
+    <section id="universes" class="tab-content">
       <h2>Universes</h2>
       <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama.</p></div>
       <div class="card"><h3>Rappers Play</h3><p>Features Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar.</p></div>
@@ -200,7 +256,7 @@
       <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with antagonist Nicole from "Class of 09".</p></div>
     </section>
 
-    <section id="characters" class="fade">
+    <section id="characters" class="tab-content">
       <h2>Characters</h2>
       <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist, family man, and multiverse scholar.</p></div>
       <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
@@ -216,7 +272,7 @@
       <div class="card"><h3>Kendrick Lamar</h3><p>Rapper in Rappers Play universe.</p></div>
     </section>
 
-    <section id="villains" class="fade">
+    <section id="villains" class="tab-content">
       <h2>Villains</h2>
       <div class="card"><h3>Ace the Creator</h3><p>An evil clone of Tyler. Likely the Main Antagonist of the entire Multiverse (Seasons 1 & 2).</p></div>
       <div class="card"><h3>Pennywise</h3><p>Main antagonist for Democrats Plays. Appears in Seasons 1 & 2.</p></div>
@@ -224,7 +280,7 @@
       <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
     </section>
 
-    <section id="episodes" class="fade">
+    <section id="episodes" class="tab-content">
       <h2>Episodes</h2>
       <div class="episode-grid">
         <div class="card"><h3>1. Pilot</h3><p>The series premiere introducing the core multiverse concept.</p>
@@ -233,18 +289,15 @@
         <div class="card"><h3>2. The Music</h3><p>Continues the saga with a focus on music.</p>
           <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe></div>
         </div>
-        <div class="card"><h3>3. Battleworld</h3><p>The Presidents fall into the Battleworld.</p>
+        <div class="card"><h3>3. The Battleworld</h3><p>The Presidents fall into the Battleworld as the multiverse collision begins.</p>
           <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/uzuY7NQnmQY" frameborder="0" allowfullscreen></iframe></div>
         </div>
       </div>
     </section>
 
-    <section id="production" class="fade">
+    <section id="production" class="tab-content">
       <h2>Production</h2>
       <div class="card"><h3>Origin</h3><p>Began in 2024, originally planned as "Battleworld". Produced by US Plays, Rappers Play, and more.</p></div>
-    </section>
-
-    <section id="hub" class="fade">
       <div class="card discord-card">
         <img src="d.png" class="discord-img" alt="Discord">
         <h3>The Hub</h3>
@@ -258,6 +311,30 @@
 <footer>THE AI MULTIVERSE WIKI &copy; 2026</footer>
 
 <script>
+  function openTab(evt, tabName) {
+    // Remove instruction text once a tab is selected
+    const instruction = document.getElementById('explore-instruction');
+    if(instruction) {
+        instruction.style.display = 'none';
+    }
+
+    let tabcontent = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      tabcontent[i].classList.remove("active");
+    }
+    let tablinks = document.getElementsByClassName("tab-btn");
+    for (let i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.className += " active";
+    
+    document.getElementById(tabName).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* --- BG LOGO ANIMATION --- */
   const bg = document.getElementById('bg-pattern');
   const logos = [];
   const rows = 5;
@@ -269,7 +346,6 @@
       img.src = 'logo.png';
       img.className = 'bg-logo';
       bg.appendChild(img);
-      
       logos.push({
         el: img,
         x: (c * (window.innerWidth / (cols - 1))),
@@ -291,21 +367,14 @@
   }
   animate();
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-
   function filterWiki() {
     let input = document.getElementById('wikiSearch').value.toLowerCase();
-    let cards = document.querySelectorAll('.card');
+    let cards = document.querySelectorAll('.tab-content.active .card');
     cards.forEach(card => {
-      if (card.closest('#hub') || card.closest('#episodes')) return;
       card.style.display = card.innerText.toLowerCase().includes(input) ? "" : "none";
     });
   }
 
-  /* --- REDIRECT SCRIPT --- */
   let typedSecret = "";
   const secretCode = "RIPRECROOM";
   const redirectUrl = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
