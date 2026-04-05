@@ -102,6 +102,17 @@
     z-index: 5;
   }
 
+  .info-section-container::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+    pointer-events: none;
+  }
+
   .search-container {
     max-width: 700px;
     margin: 80px auto 20px;
@@ -121,6 +132,7 @@
     transition: 0.3s;
     text-align: center;
   }
+  #wikiSearch:focus { border-color: #bb86fc; box-shadow: 0 0 25px rgba(187, 134, 252, 0.2); }
 
   /* --- TAB SYSTEM --- */
   .tabs-nav {
@@ -143,18 +155,81 @@
     transition: 0.3s;
   }
 
+  .tab-btn:hover { background: rgba(187, 134, 252, 0.15); }
   .tab-btn.active {
     background: #bb86fc;
     color: #000;
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
   }
 
+  /* --- EPISODE TRANSFORMATION UI --- */
+  .season-hero-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  .season-hero-btn {
+    background: linear-gradient(135deg, #bb86fc 0%, #6200ee 100%);
+    color: #000;
+    font-size: 3rem;
+    font-weight: 900;
+    padding: 60px 100px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 20px 50px rgba(187, 134, 252, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .season-hero-btn:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 30px 60px rgba(187, 134, 252, 0.5);
+  }
+
+  .episode-selection-grid {
+    display: none; /* Initially hidden */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .ep-link-card {
+    background: rgba(187, 134, 252, 0.05);
+    border: 2px solid rgba(187, 134, 252, 0.2);
+    border-radius: 25px;
+    padding: 30px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+    text-align: center;
+  }
+
+  .ep-link-card:hover {
+    background: rgba(187, 134, 252, 0.15);
+    border-color: #bb86fc;
+    transform: translateY(-8px);
+  }
+
+  .ep-link-card h3 {
+    color: #bb86fc;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- SHARED TEXT --- */
   #explore-instruction {
     text-align: center;
     font-size: 1.4rem;
     color: #bb86fc;
     margin-bottom: 40px;
     font-weight: 600;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
   }
 
   .tab-content { display: none; animation: fadeIn 0.4s ease; }
@@ -167,39 +242,33 @@
 
   main { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
 
+  h2 { 
+    margin: 40px 0 35px; 
+    font-size: 2.6rem; 
+    border-left: 8px solid #bb86fc;
+    padding-left: 25px;
+    color: #ffffff;
+  }
+
   .card {
     background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 32px;
     padding: 45px;
     margin-bottom: 30px;
   }
+  .card h3 { color: #bb86fc; margin-bottom: 15px; font-size: 1.8rem; }
 
-  .episode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-  
-  /* FIXED VIDEO BOX FOR HIGH QUALITY */
-  .video-box { 
-    margin-top: 25px; 
-    border-radius: 24px; 
-    overflow: hidden; 
-    aspect-ratio: 16/9; 
-    background: #000; 
-    border: 1px solid rgba(187,134,252,0.2);
-    position: relative;
-  }
-  
-  .video-box iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+  .discord-card { text-align: center; }
+  .discord-img { width: 110px; margin-bottom: 25px; }
+  .join-btn { color: #00d2ff; font-weight: bold; text-decoration: none; font-size: 1.3rem; }
 
   footer {
     text-align: center;
     padding: 120px 20px;
     color: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     background: #000000;
   }
 </style>
@@ -210,7 +279,7 @@
   <div id="bg-pattern"></div>
   <div class="hero-content">
     <h1 class="hero-title">The AI Multiverse</h1>
-    <p class="hero-subtitle">The definitive archive of the Presidential and Rappers Play sagas.</p>
+    <p class="hero-subtitle">The definitive archive of the Presidential and Rappers Play sagas. Explore 12+ universes and an ever-expanding story.</p>
     <a href="#content-start" class="explore-btn">Explore the Multiverse</a>
   </div>
 </div>
@@ -219,7 +288,7 @@
 
 <div class="info-section-container">
   <div class="search-container">
-    <input type="text" id="wikiSearch" placeholder="Search..." onkeyup="filterWiki()">
+    <input type="text" id="wikiSearch" placeholder="Search characters, universes, or villains..." onkeyup="filterWiki()">
   </div>
 
   <div class="tabs-nav">
@@ -234,29 +303,76 @@
 
   <main>
     <section id="universes" class="tab-content">
-      <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents.</p></div>
+      <h2>Universes</h2>
+      <div class="card"><h3>AI Presidents</h3><p>Multiple variations of U.S. presidents like Donald Trump, Joe Biden, and Barack Obama.</p></div>
+      <div class="card"><h3>Rappers Play</h3><p>Features Kanye West, Playboi Carti, Tyler, Frank Ocean, and Kendrick Lamar.</p></div>
+      <div class="card"><h3>Democrats Hangout</h3><p>Features Gavin Newsom, Kamala Harris, and Tim Walz.</p></div>
+      <div class="card"><h3>ThePresidentialMorons</h3><p>Chaos-driven universe with antagonist Nicole from "Class of 09".</p></div>
+    </section>
+
+    <section id="characters" class="tab-content">
+      <h2>Characters</h2>
+      <div class="card">
+        <h3>Tyler, The Creator</h3>
+        <p>He created the Rappers Play universe itself.</p>
+      </div>
+      <div class="card">
+        <h3>Frank Ocean</h3>
+        <p>Rapper in Rappers Play universe. Will he ever drop?</p>
+      </div>
+      <div class="card">
+        <h3>Kendrick Lamar</h3>
+        <p>Rapper in Rappers Play universe.</p>
+      </div>
+      <div class="card"><h3>Jerry Thomas Edward</h3><p>SpaceX scientist, family man, and multiverse scholar.</p></div>
+      <div class="card"><h3>Donald Trump</h3><p>Multiple versions throughout the multiverse.</p></div>
+      <div class="card"><h3>Joe Biden</h3><p>President with multiple variations in the AI Multiverse.</p></div>
+      <div class="card"><h3>Barack Obama</h3><p>Has multiple versions in the AI Multiverse.</p></div>
+      <div class="card"><h3>Gavin Newsom</h3><p>Governor of California. Also a filmmaking politician.</p></div>
+      <div class="card"><h3>Kamala Harris</h3><p>Horror movie fan planning a 2028 campaign. Filmmaking politician.</p></div>
+      <div class="card"><h3>Tim Walz</h3><p>Learning to love horror films. Filmmaking politician.</p></div>
+      <div class="card"><h3>Kanye West</h3><p>Rapper in Rappers Play universe. Known for nitrous addiction.</p></div>
+      <div class="card"><h3>Playboi Carti</h3><p>Rapper In Rappers Play Universe. FWÆH.</p></div>
+    </section>
+
+    <section id="villains" class="tab-content">
+      <h2>Villains</h2>
+      <div class="card"><h3>Ace the Creator</h3><p>An evil clone of Tyler. Likely the Main Antagonist of the entire Multiverse (Seasons 1 & 2).</p></div>
+      <div class="card"><h3>Pennywise</h3><p>Main antagonist for Democrats Plays. Appears in Seasons 1 & 2.</p></div>
+      <div class="card"><h3>Nicole</h3><p>Main antagonist in ThePresidentialMorons universe.</p></div>
+      <div class="card"><h3>Elon</h3><p>Main threat in the US Plays universe.</p></div>
     </section>
 
     <section id="episodes" class="tab-content">
-      <div class="episode-grid">
-        <div class="card">
-          <h3>1. Pilot</h3>
-          <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/S2afPMFTAo0?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="card">
-          <h3>2. The Music</h3>
-          <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/Z8ywO1ONbXw?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="card">
-          <h3>3. The Battleworld</h3>
-          <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/uzuY7NQnmQY?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
+      <h2>Episodes</h2>
+      <div class="season-hero-container" id="heroContainer">
+        <button class="season-hero-btn" onclick="transformToEpisodes()">SEASON 1</button>
+      </div>
+
+      <div class="episode-selection-grid" id="epGrid">
+        <a href="https://www.youtube.com/watch?v=S2afPMFTAo0" target="_blank" class="ep-link-card">
+          <h3>Episode 1</h3>
+          <p>The Pilot: The definitive start to the multiverse saga.</p>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Z8ywO1ONbXw" target="_blank" class="ep-link-card">
+          <h3>Episode 2</h3>
+          <p>The Music: The rhythm of the multiverse begins to collide.</p>
+        </a>
+        <a href="https://www.youtube.com/watch?v=uzuY7NQnmQY" target="_blank" class="ep-link-card">
+          <h3>Episode 3</h3>
+          <p>The Battleworld: Chaos erupts as universes fight for survival.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="production" class="tab-content">
+      <h2>Production</h2>
+      <div class="card"><h3>Origin</h3><p>Began in 2024, originally planned as "Battleworld". Produced by US Plays, Rappers Play, and more.</p></div>
+      <div class="card discord-card">
+        <img src="d.png" class="discord-img" alt="Discord">
+        <h3>The Hub</h3>
+        <p>The central hub for sneak peeks and updates.</p>
+        <a href="https://discord.gg/5sxsdE3dNZ" target="_blank" class="join-btn">click me to join (:</a>
       </div>
     </section>
   </main>
@@ -265,6 +381,11 @@
 <footer>THE AI MULTIVERSE WIKI &copy; 2026</footer>
 
 <script>
+  function transformToEpisodes() {
+    document.getElementById('heroContainer').style.display = 'none';
+    document.getElementById('epGrid').style.display = 'grid';
+  }
+
   function openTab(evt, tabName) {
     const instruction = document.getElementById('explore-instruction');
     if(instruction) instruction.style.display = 'none';
@@ -274,24 +395,78 @@
       tabcontent[i].style.display = "none";
       tabcontent[i].classList.remove("active");
     }
-    
     let tablinks = document.getElementsByClassName("tab-btn");
     for (let i = 0; i < tablinks.length; i++) {
-      tablinks[i].classList.remove("active");
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
-    const activeTab = document.getElementById(tabName);
-    activeTab.style.display = "block";
-    activeTab.classList.add("active");
-    evt.currentTarget.classList.add("active");
+    if (tabName !== 'episodes') {
+        document.getElementById('heroContainer').style.display = 'flex';
+        document.getElementById('epGrid').style.display = 'none';
+    }
 
-    // FIX: Force YouTube to realize the container is now visible/large
-    window.dispatchEvent(new Event('resize'));
-    
-    activeTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.className += " active";
+    document.getElementById(tabName).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Animation and Search logic remains the same...
+  /* --- BG LOGO ANIMATION --- */
+  const bg = document.getElementById('bg-pattern');
+  const logos = [];
+  const rows = 5;
+  const cols = 6;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const img = document.createElement('img');
+      img.src = 'logo.png';
+      img.className = 'bg-logo';
+      bg.appendChild(img);
+      logos.push({
+        el: img,
+        x: (c * (window.innerWidth / (cols - 1))),
+        y: (r * (window.innerHeight / (rows - 1))),
+        vx: (r % 2 === 0) ? 0.8 : -0.8, 
+      });
+    }
+  }
+
+  function animate() {
+    logos.forEach(logo => {
+      logo.x += logo.vx;
+      if (logo.x > window.innerWidth + 200) logo.x = -200;
+      if (logo.x < -200) logo.x = window.innerWidth + 200;
+      logo.el.style.left = logo.x + 'px';
+      logo.el.style.top = logo.y + 'px';
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  function filterWiki() {
+    let input = document.getElementById('wikiSearch').value.toLowerCase();
+    let cards = document.querySelectorAll('.tab-content.active .card, .tab-content.active .ep-link-card');
+    cards.forEach(card => {
+      card.style.display = card.innerText.toLowerCase().includes(input) ? "" : "none";
+    });
+  }
+
+  let typedSecret = "";
+  const secretCode = "RIPRECROOM";
+  const redirectUrl = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      typedSecret += e.key.toUpperCase();
+      if (typedSecret.endsWith(secretCode)) {
+        window.location.href = redirectUrl;
+      }
+      if (typedSecret.length > 50) {
+        typedSecret = typedSecret.substring(typedSecret.length - secretCode.length);
+      }
+    }
+  });
 </script>
 </body>
 </html>
