@@ -20,24 +20,23 @@
 
   /* ========================================= */
   /* --- MAINTENANCE blackout OVERLAY --- */
-  /* --- (STYLING MATCHES MOCKUP) --- */
   /* ========================================= */
   #maintenance-blackout {
-    display: none; /* Initially hidden, controlled by JS toggle */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 0, 20, 0.99); /* Deep Battleworld dark */
-    backdrop-filter: blur(15px); /* Soft focus background */
-    z-index: 10000; /* Must be the very top layer */
+    background: rgba(10, 0, 20, 0.99); 
+    backdrop-filter: blur(15px); 
+    z-index: 10000; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 30px;
-    cursor: wait; /* Visual cue that site is processing */
+    cursor: wait;
   }
 
   #maintenance-blackout .r-logo-container {
@@ -54,7 +53,7 @@
   #maintenance-blackout img.r-spinning {
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.9)); /* Purple Core Glow */
+    filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.9)); 
     animation: calmSpin 6s linear infinite, glowPulse 3s ease-in-out infinite alternate;
   }
 
@@ -63,14 +62,14 @@
     color: #ffffff;
     font-weight: 800;
     margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(187, 134, 252, 0.8); /* Core Text Glow */
+    text-shadow: 0 0 20px rgba(187, 134, 252, 0.8); 
   }
 
   #maintenance-blackout h2 {
     font-size: 1.8rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 50px;
-    border: none; /* Removed the default side-border h2 style for this view */
+    border: none; 
     text-shadow: 0 0 10px rgba(187, 134, 252, 0.6);
   }
 
@@ -92,7 +91,6 @@
     box-shadow: 0 20px 60px rgba(187, 134, 252, 0.6);
   }
 
-  /* Animation Definitions */
   @keyframes calmSpin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -106,8 +104,6 @@
   /* ========================================= */
   /* --- MAIN SITE & EPISODE STYLING --- */
   /* ========================================= */
-
-  /* --- HERO START PAGE --- */
   .hero-wrapper {
     position: relative;
     height: 100vh;
@@ -181,7 +177,6 @@
     background: #d1abff;
   }
 
-  /* --- INFO SECTION --- */
   .info-section-container {
     background-color: #0a0014; 
     min-height: 100vh;
@@ -223,7 +218,6 @@
   }
   #wikiSearch:focus { border-color: #bb86fc; box-shadow: 0 0 25px rgba(187, 134, 252, 0.2); }
 
-  /* --- TAB SYSTEM --- */
   .tabs-nav {
     display: flex;
     justify-content: center;
@@ -251,7 +245,6 @@
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
   }
 
-  /* --- CENTERED TEXT BELOW TABS --- */
   #explore-instruction {
     text-align: center;
     font-size: 1.4rem;
@@ -307,7 +300,6 @@
     background: #000000;
   }
 
-  /* --- EPISODE SELECTOR UI --- */
   .season-selector {
     display: flex;
     justify-content: center;
@@ -330,12 +322,13 @@
     background: rgba(187, 134, 252, 0.2);
     border-color: #bb86fc;
   }
-
-  .episode-view { display: none; }
-  .episode-view.active { display: block; animation: fadeIn 0.4s ease; }
 </style>
 </head>
 <body>
+
+<audio id="maintMusic" loop>
+  <source src="Deltarune.mp3" type="audio/mpeg">
+</audio>
 
 <div id="maintenance-blackout">
   <div class="r-logo-container">
@@ -348,6 +341,7 @@
   <a href="https://discord.gg/5sxsdE3dNZ" target="_blank" class="discord-call-to-action-btn">
     Click Me To Join (:
   </a>
+  <p style="margin-top: 25px; font-size: 0.8rem; opacity: 0.5; font-style: italic;">(Click anywhere on screen to enable music)</p>
 </div>
 
 <div id="main-site-content">
@@ -412,11 +406,9 @@
 
       <section id="episodes" class="tab-content">
         <h2>Episodes</h2>
-        
         <div class="season-selector">
           <button class="season-btn" onclick="selectSeason(event, 's1')">Season 1</button>
         </div>
-
         <div id="s1" class="episode-grid">
           <div class="card"><h3>1. Pilot</h3><p>The saga premiere where realities collide.</p>
             <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe></div>
@@ -449,23 +441,35 @@
   /* ========================================= */
   /* --- MAINTENANCE blackout TOGGLE --- */
   /* ========================================= */
-  // >>> SET THIS TO true TO ACTIVATE blackout MODE <<<
-  const isUpdating = false; 
+  const isUpdating = true; // Change to true to test the blackout screen!
   /* ========================================= */
 
-  // Execute maintenance logic immediately on load
+  const blackout = document.getElementById('maintenance-blackout');
+  const mainContent = document.getElementById('main-site-content');
+  const audio = document.getElementById('maintMusic');
+
+  // Logic to handle blackout and audio vibes
   if (isUpdating) {
-    document.getElementById('maintenance-blackout').style.display = 'flex';
-    document.getElementById('main-site-content').style.display = 'none';
+    blackout.style.display = 'flex';
+    mainContent.style.display = 'none';
+    
+    // Set volume to not too loud (30%)
+    audio.volume = 0.3;
+
+    // Browser workaround: Start music on user click
+    const startVibes = () => {
+      audio.play().catch(err => console.log("Audio waiting for interaction..."));
+      document.removeEventListener('click', startVibes);
+    };
+    document.addEventListener('click', startVibes);
   } else {
-    document.getElementById('maintenance-blackout').style.display = 'none';
-    document.getElementById('main-site-content').style.display = 'block';
+    blackout.style.display = 'none';
+    mainContent.style.display = 'block';
   }
 
   function openTab(evt, tabName) {
     const instruction = document.getElementById('explore-instruction');
     if(instruction) { instruction.style.display = 'none'; }
-
     let tabcontent = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
@@ -479,8 +483,6 @@
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.className += " active";
     document.getElementById(tabName).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    
-    // Forces YT players to recalculate when the active container is shown
     window.dispatchEvent(new Event('resize'));
   }
 
@@ -490,11 +492,9 @@
       seasonbtns[i].classList.remove("active");
     }
     evt.currentTarget.classList.add("active");
-    // Recalculate layout for the grid that is now visible
     window.dispatchEvent(new Event('resize'));
   }
 
-  /* --- BG LOGO ANIMATION (Lore Preserved) --- */
   const bg = document.getElementById('bg-pattern');
   const logos = [];
   const rows = 5;
@@ -535,7 +535,6 @@
     });
   }
 
-  /* --- RIPRECROOM REDIRECT (Lore Preserved) --- */
   let typedSecret = "";
   const secretCode = "RIPRECROOM";
   const redirectUrl = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
