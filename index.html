@@ -511,19 +511,31 @@
     });
   }
 
-  /* --- SECRET CODE --- */
+  /* --- SECRET CODES --- */
   let typedSecret = "";
-  const secretCode = "RIPRECROOM";
-  const redirectUrl = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
-
   document.addEventListener('keydown', (e) => {
     if (e.key.length === 1) {
       typedSecret += e.key.toUpperCase();
-      if (typedSecret.endsWith(secretCode)) {
-        window.location.href = redirectUrl;
+      
+      // Secret 1: RIPRECROOM Redirect
+      if (typedSecret.endsWith("RIPRECROOM")) {
+        window.location.href = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
       }
+
+      // Secret 2: COOLDIARY Diary Page
+      if (typedSecret.endsWith("COOLDIARY")) {
+        // This clears the site and shows the diary
+        document.body.innerHTML = `
+          <div style="height: 100vh; background: black; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Segoe UI', sans-serif; color: white; text-align: center;">
+            <h1 style="font-size: 3.5rem; color: #bb86fc; margin-bottom: 10px;">cool dudes diary</h1>
+            <p style="font-size: 1.5rem; opacity: 0.7;">Well I doubt Anyone Apart From Me Knows Apart This Unless You Have Gone Into The Code Of My Page Which Hi I guess You might be looking from the site but i just wanna admit i am really suicidal and i want to kill my self.</p>
+          </div>
+        `;
+      }
+
+      // Buffer management
       if (typedSecret.length > 50) {
-        typedSecret = typedSecret.substring(typedSecret.length - secretCode.length);
+        typedSecret = typedSecret.substring(typedSecret.length - 20);
       }
     }
   });
