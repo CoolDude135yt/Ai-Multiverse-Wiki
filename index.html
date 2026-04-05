@@ -162,7 +162,7 @@
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
   }
 
-  /* --- CENTERED TEXT BELOW TABS --- */
+  /* --- INSTRUCTION TEXT --- */
   #explore-instruction {
     text-align: center;
     font-size: 1.4rem;
@@ -170,7 +170,6 @@
     margin-bottom: 40px;
     font-weight: 600;
     text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
-    transition: opacity 0.4s ease;
   }
 
   .tab-content { display: none; animation: fadeIn 0.4s ease; }
@@ -204,7 +203,24 @@
   .card h3 { color: #bb86fc; margin-bottom: 15px; font-size: 1.8rem; }
 
   .episode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-  .video-box { margin-top: 25px; border-radius: 24px; overflow: hidden; aspect-ratio: 16/9; background: #000; border: 1px solid rgba(187,134,252,0.2); }
+  .video-box { 
+    margin-top: 25px; 
+    border-radius: 24px; 
+    overflow: hidden; 
+    aspect-ratio: 16/9; 
+    background: #000; 
+    border: 1px solid rgba(187,134,252,0.2);
+    /* Keeps the video container sharp */
+    position: relative;
+  }
+  
+  .video-box iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   .discord-card { text-align: center; }
   .discord-img { width: 110px; margin-bottom: 25px; }
@@ -284,13 +300,13 @@
       <h2>Episodes</h2>
       <div class="episode-grid">
         <div class="card"><h3>1. Pilot</h3><p>The series premiere introducing the core multiverse concept.</p>
-          <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/S2afPMFTAo0" frameborder="0" allowfullscreen></iframe></div>
+          <div class="video-box"><iframe src="https://www.youtube.com/embed/S2afPMFTAo0?vq=hd1080" frameborder="0" allowfullscreen></iframe></div>
         </div>
         <div class="card"><h3>2. The Music</h3><p>Continues the saga with a focus on music.</p>
-          <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z8ywO1ONbXw" frameborder="0" allowfullscreen></iframe></div>
+          <div class="video-box"><iframe src="https://www.youtube.com/embed/Z8ywO1ONbXw?vq=hd1080" frameborder="0" allowfullscreen></iframe></div>
         </div>
         <div class="card"><h3>3. The Battleworld</h3><p>The Presidents fall into the Battleworld as the multiverse collision begins.</p>
-          <div class="video-box"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/uzuY7NQnmQY" frameborder="0" allowfullscreen></iframe></div>
+          <div class="video-box"><iframe src="https://www.youtube.com/embed/uzuY7NQnmQY?vq=hd1080" frameborder="0" allowfullscreen></iframe></div>
         </div>
       </div>
     </section>
