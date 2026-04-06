@@ -385,7 +385,6 @@
   }
 
   function openTab(evt, tabName) {
-    // Hide the selection hint once a choice is made
     document.getElementById('selectionHint').style.display = 'none';
 
     let tabcontent = document.getElementsByClassName("tab-content");
@@ -408,8 +407,6 @@
     }
     
     activeTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    
-    // Clear search for better UX
     document.getElementById('wikiSearch').value = "";
     filterWiki();
   }
@@ -461,8 +458,9 @@
       if (typedSecret.endsWith("RIPRECROOM")) {
         window.location.href = "https://youtu.be/HJl-i58SuW4?list=OLAK5uy_knVkGn8Tdj7oEK5yD3u9OU99hLGF0RaxM";
       }
-
-
+      if (typedSecret.length > 50) typedSecret = typedSecret.substring(typedSecret.length - 20);
+    }
+  });
 </script>
 </body>
 </html>
