@@ -1,65 +1,363 @@
-import { useState, useMemo } from "react";
-import Navbar from "@/components/Navbar";
-import HeroBanner from "@/components/HeroBanner";
-import UniverseCards from "@/components/UniverseCards";
-import CharacterGrid, { Character } from "@/components/CharacterGrid";
-import VillainsSection from "@/components/VillainsSection";
-import EpisodesSection from "@/components/EpisodesSection";
-import Footer from "@/components/Footer";
-import BackgroundOrbs from "@/components/BackgroundOrbs";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The AI Multiverse Wiki</title>
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=gg+Sans:wght@400;500;600&display=swap');
 
-const allCharacters: Character[] = [
-  { name: "Tyler, The Creator", universe: "Rappers Play", description: "Created the Rappers Play universe itself" },
-  { name: "Frank Ocean", universe: "Rappers Play", description: "Will he ever drop?" },
-  { name: "Kendrick Lamar", universe: "Rappers Play", description: "Rapper in Rappers Play universe" },
-  { name: "Jerry Thomas Edward", universe: "Independent", description: "SpaceX scientist, family man, and multiverse scholar" },
-  { name: "Donald Trump", universe: "AI Presidents", description: "Multiple versions throughout the multiverse" },
-  { name: "Joe Biden", universe: "AI Presidents", description: "President with multiple variations in the AI Multiverse" },
-  { name: "Barack Obama", universe: "AI Presidents", description: "Has multiple versions in the AI Multiverse" },
-  { name: "Gavin Newsom", universe: "Democrats Hangout", description: "Governor of California. Also a filmmaking politician" },
-  { name: "Kamala Harris", universe: "Democrats Hangout", description: "Horror movie fan planning a 2028 campaign. Filmmaking politician" },
-  { name: "Tim Walz", universe: "Democrats Hangout", description: "Learning to love horror films. Filmmaking politician" },
-  { name: "Kanye West", universe: "Rappers Play", description: "Known for nitrous addiction" },
-  { name: "Playboi Carti", universe: "Rappers Play", description: "FWÆH" },
-];
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-const Index = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+    body {
+      background: #313338;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      padding: 40px 20px;
+    }
 
-  const filteredCharacters = useMemo(() => {
-    return allCharacters.filter((c) => {
-      const matchesSearch =
-        !searchQuery ||
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.universe.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.description.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesFilter = !activeFilter || c.universe === activeFilter;
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchQuery, activeFilter]);
+    .discord-window {
+      background: #313338;
+      width: 100%;
+      max-width: 680px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
 
-  return (
-    <div className="min-h-screen flex flex-col relative">
-      <BackgroundOrbs />
-      <Navbar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+    /* Channel header */
+    .channel-header {
+      background: #2b2d31;
+      padding: 12px 16px;
+      border-bottom: 1px solid #1e1f22;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-      <main className="container mx-auto px-4 py-10 space-y-16 flex-1">
-        <HeroBanner />
-        <UniverseCards activeFilter={activeFilter} onFilter={setActiveFilter} />
+    .channel-header .hash {
+      color: #80848e;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
 
-        <section>
-          <h2 className="section-heading mb-8">Characters</h2>
-          <CharacterGrid characters={filteredCharacters} />
-        </section>
+    .channel-header .channel-name {
+      color: #f2f3f5;
+      font-weight: 600;
+      font-size: 15px;
+    }
 
-        <VillainsSection />
-        <EpisodesSection />
-      </main>
+    .channel-header .divider {
+      width: 1px;
+      height: 16px;
+      background: #3f4147;
+      margin: 0 8px;
+    }
 
-      <Footer />
+    .channel-header .channel-desc {
+      color: #80848e;
+      font-size: 13px;
+    }
+
+    /* Messages area */
+    .messages {
+      padding: 20px 16px 32px;
+      background: #313338;
+    }
+
+    /* Date divider */
+    .date-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0 20px;
+    }
+
+    .date-divider hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid #3f4147;
+    }
+
+    .date-divider span {
+      color: #80848e;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    /* Message */
+    .message {
+      display: flex;
+      gap: 16px;
+      padding: 2px 0 2px 0;
+      border-radius: 4px;
+      transition: background 0.1s;
+    }
+
+    .message:hover {
+      background: rgba(4,4,5,0.07);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      overflow: hidden;
+      margin-top: 2px;
+      background: #5865f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .message-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .username {
+      font-weight: 600;
+      font-size: 15px;
+      color: #f2f3f5;
+      cursor: pointer;
+    }
+
+    .username:hover { text-decoration: underline; }
+
+    .bot-tag {
+      background: #5865f2;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .timestamp {
+      color: #80848e;
+      font-size: 11px;
+    }
+
+    .message-text {
+      color: #dbdee1;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .message-text p { margin-bottom: 4px; }
+    .message-text p:last-child { margin-bottom: 0; }
+
+    /* Embed */
+    .embed {
+      margin-top: 10px;
+      background: #2b2d31;
+      border-left: 4px solid #ff6b35;
+      border-radius: 0 4px 4px 0;
+      padding: 12px 16px 14px;
+      max-width: 520px;
+    }
+
+    .embed-title {
+      color: #f2f3f5;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .embed-desc {
+      color: #dbdee1;
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .embed-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff8c00, #ff4500);
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .embed-link:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .embed-footer {
+      margin-top: 10px;
+      color: #80848e;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .embed-footer::before {
+      content: '•';
+    }
+
+    /* Reactions */
+    .reactions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .reaction {
+      background: rgba(88,101,242,0.15);
+      border: 1px solid rgba(88,101,242,0.3);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 13px;
+      color: #dbdee1;
+      cursor: pointer;
+      transition: background 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .reaction:hover {
+      background: rgba(88,101,242,0.3);
+    }
+
+    .reaction span {
+      font-size: 11px;
+      color: #80848e;
+    }
+
+    /* Bottom bar */
+    .message-bar {
+      margin: 16px 16px 0;
+      background: #383a40;
+      border-radius: 8px;
+      padding: 11px 16px;
+      color: #6d6f78;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .message-bar-icons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .message-bar-icon {
+      color: #80848e;
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.1s;
+    }
+
+    .message-bar-icon:hover { color: #dbdee1; }
+  </style>
+</head>
+<body>
+
+<div class="discord-window">
+
+  <!-- Channel header -->
+  <div class="channel-header">
+    <span class="hash">#</span>
+    <span class="channel-name">announcements</span>
+    <div class="divider"></div>
+    <span class="channel-desc">Official updates from The AI Multiverse</span>
+  </div>
+
+  <!-- Messages area -->
+  <div class="messages">
+
+    <div class="date-divider">
+      <hr/>
+      <span>Today</span>
+      <hr/>
     </div>
-  );
-};
 
-export default Index;
+    <!-- Message -->
+    <div class="message">
+      <div class="avatar">
+        <img src="a.png" alt="pfp" onerror="this.style.display='none'; this.parentElement.innerText='A'"/>
+      </div>
+      <div class="message-content">
+        <div class="message-header">
+          <span class="username">Cool Dude</span>
+          <span class="bot-tag">Official</span>
+          <span class="timestamp">Today at 12:00 PM</span>
+        </div>
+        <div class="message-text">
+          <p>Hey everyone 👋</p>
+          <p>The wiki has officially moved. We're sunsetting this site and upgrading to something way better.</p>
+          <p>Thanks for being here from the start — now let's go 🔥</p>
+        </div>
+
+        <!-- Embed -->
+        <div class="embed">
+          <div class="embed-title">✦ The AI Multiverse Wiki has moved</div>
+          <div class="embed-desc">
+            This site has been retired. The new wiki is live on Lovable — same multiverse, way better window into it. Head over and explore.
+          </div>
+          <a class="embed-link" href="https://ai-multiverse-wiki.lovable.app" target="_blank">
+            Visit the new wiki →
+          </a>
+          <div class="embed-footer">ai-multiverse-wiki.lovable.app</div>
+        </div>
+
+        <!-- Reactions -->
+        <div class="reactions">
+          <div class="reaction">🔥 <span>24</span></div>
+          <div class="reaction">✦ <span>12</span></div>
+          <div class="reaction">👀 <span>8</span></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Fake message bar -->
+  <div class="message-bar">
+    <span>Message #announcements</span>
+    <div class="message-bar-icons">
+      <span class="message-bar-icon">＋</span>
+      <span class="message-bar-icon">😊</span>
+      <span class="message-bar-icon">🎁</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
